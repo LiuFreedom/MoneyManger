@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#0F9D58</color>
+    <color name="colorPrimaryDark">#0C7E46</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="white">#ffffffff</color>
+    <color name="home_act_distrib">#ff6073</color>
+    <color name="home_yellow">#FFB517</color>
+    <color name="home_pink">#ff6073</color>
+    <color name="home_blue">#3D98FF</color>
+    <color name="home_green">#10B690</color>
+    <color name="transparency">#00ffffff</color>
+
 </resources>

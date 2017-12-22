@@ -3,24 +3,30 @@ package com.ly.moneymanage.mvp.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.widget.TextView;
 
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.UiUtils;
-
+import com.ly.moneymanage.R;
 import com.ly.moneymanage.di.component.DaggerWelcomeComponent;
 import com.ly.moneymanage.di.module.WelcomeModule;
 import com.ly.moneymanage.mvp.contract.WelcomeContract;
 import com.ly.moneymanage.mvp.presenter.WelcomePresenter;
 
-import com.ly.moneymanage.R;
+import org.simple.eventbus.EventBus;
+import org.simple.eventbus.Subscriber;
 
+import butterknife.BindView;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 
 public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements WelcomeContract.View {
 
+
+    @BindView(R.id.text)
+    TextView text;
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -39,9 +45,27 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                    Intent intent = new Intent(WelcomeActivity.this, MainMenuActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                    Thread.sleep(800);
+                    EventBus.getDefault().post(1);
+                } catch (Exception e) {
 
+                }
+            }
+        }).start();
     }
 
+    @Subscriber
+    public void kill(int i) {
+        killMyself();
+    }
 
     @Override
     public void showLoading() {
@@ -69,6 +93,4 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
     public void killMyself() {
         finish();
     }
-
-
 }
